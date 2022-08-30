@@ -4,7 +4,7 @@ Sample file for using express.
 const express = require("express")
 const app = express()
 
-//set up static pag
+//set up static page
 app.use(express.static("public"))
 //allows you to access the body of html page (boilerplate)
 app.use(express.urlencoded({extended: true}))
@@ -12,6 +12,20 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.set('view engine',  'ejs')
+
+const livereload = require("livereload")
+const connectLiveReload = require("connect-livereload")
+
+const liveReloadServer = livereload.createServer()
+
+liveReloadServer.server.once("connection", ()=>{
+    setTimeout(() => {
+        liveReloadServer.refresh("/")
+    },
+    100)
+} )
+
+app.use(connectLiveReload())
 
 //this puts the logger on just the app.get
 //this is middleware
@@ -27,6 +41,7 @@ app.get("/",logger, (req, res) => {
 //depend on where your use statement is.
 //app.use(logger)
 const userRouter = require('./routes/users')
+const { connect } = require("./routes/users")
 
 app.use('/users', userRouter)
 
@@ -37,4 +52,6 @@ function logger(req, res,next){
     next()
 }
 
-app.listen(3000)
+app.listen(3000, ()=>{
+    console.log(`App @ http://localhost:3000`)
+})
