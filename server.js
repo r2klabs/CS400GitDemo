@@ -1,5 +1,5 @@
 /*
-Sample file.
+Sample file for using express.
 */
 const express = require("express")
 const app = express()
