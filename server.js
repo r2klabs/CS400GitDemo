@@ -13,11 +13,11 @@ app.use(express.json())
 
 app.set('view engine',  'ejs')
 
-const livereload = require("livereload")
-const connectLiveReload = require("connect-livereload")
+//const livereload = require("livereload")
+//const connectLiveReload = require("connect-livereload")
 
-const liveReloadServer = livereload.createServer()
-
+//const liveReloadServer = livereload.createServer()
+/*
 liveReloadServer.server.once("connection", ()=>{
     setTimeout(() => {
         liveReloadServer.refresh("/")
@@ -26,6 +26,7 @@ liveReloadServer.server.once("connection", ()=>{
 } )
 
 app.use(connectLiveReload())
+*/
 
 //this puts the logger on just the app.get
 //this is middleware
